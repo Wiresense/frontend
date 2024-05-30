@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center" id="title">Wiresense Frontend</h1>
 
-## Getting Started
+![wiresense.js](https://socialify.git.ci/Wiresense/frontend/image?forks=1&issues=1&language=1&name=1&owner=1&pattern=Solid&pulls=1&stargazers=1&theme=Auto)
 
-First, run the development server:
+<p align="center">
+    <img src="https://img.shields.io/badge/Made%20with%20Love%E2%9D%A4%EF%B8%8F-black?style=for-the-badge
+    " alt="made with love">
+    <img src="https://img.shields.io/badge/Typescript-ts?style=for-the-badge&amp;logo=typescript&amp;logoColor=white&amp;color=%233178C6" alt="typescript">
+</p>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Frontend for wiresense clients to show live data from connected sensors
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️Features
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- View all sensors in a nice graph
+- Remotly download the .csv file for all sensors
+- Take a snapshot of the live graph and save it as png
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## 📖Usage
 
-## Learn More
+1. Access the fronted [here](https://wiresense.github.io/frontend/)
+2. Make sure your wiresense client is running and can be accessed
+3. Enter the ip address of your wiresense client in the input field and click on "save" to connect to your sensors data stream
+4. Once connected you can see all available sensor streams
 
-To learn more about Next.js, take a look at the following resources:
+## 📜License
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+[MIT](https://choosealicense.com/licenses/mit/)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## ✍️Authors
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [@thedannicraft](https://www.github.com/thedannicraft)
