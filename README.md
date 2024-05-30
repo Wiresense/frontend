@@ -5,7 +5,9 @@
 <p align="center">
     <img src="https://img.shields.io/badge/Made%20with%20Love%E2%9D%A4%EF%B8%8F-black?style=for-the-badge
     " alt="made with love">
-    <img src="https://img.shields.io/badge/Typescript-ts?style=for-the-badge&amp;logo=typescript&amp;logoColor=white&amp;color=%233178C6" alt="typescript">
+    <img src="https://img.shields.io/badge/NEXT.JS-next?style=for-the-badge&amp;logo=nextdotjs&amp;logoColor=white&amp;color=black" alt="typescript">
+    <img src="https://img.shields.io/github/actions/workflow/status/Wiresense/frontend/nextjs.yml?style=for-the-badge
+    " alt="build status">
 </p>
 
 Frontend for wiresense clients to show live data from connected sensors
