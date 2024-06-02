@@ -48,6 +48,7 @@ export default function SensorWidget(props) {
                     color="green"
                     onClick={() => {
                         const link = document.createElement("a");
+                        link.target = "_blank" // Fix for firefox auto ws close on <a> click 
                         link.href = `http://${props.ip}/${encodeURIComponent(props.sensorkey)}/data.csv`;
                         link.click();
                     }}
