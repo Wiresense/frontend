@@ -17,6 +17,7 @@ export default function RootLayout({ children }) {
 		<html lang="en">
 			<head>
 				<ColorSchemeScript />
+				<meta name="darkreader-lock"></meta>
 			</head>
 			<body className={inter.className}>
 				<Theme>
