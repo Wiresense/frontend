@@ -100,6 +100,6 @@ jobs:
         uses: crazy-max/ghaction-github-pages@v4
         with:
           target_branch: pages
-          build_dir: out
+          build_dir: ./
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
