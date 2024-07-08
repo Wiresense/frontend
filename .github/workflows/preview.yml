@@ -1,28 +1,22 @@
-# Sample workflow for building and deploying a Next.js site to GitHub Pages
-#
-# To get started with Next.js see: https://nextjs.org/docs/getting-started
-#
-name: Deploy Next.js site to Pages
+name: Deploy Next.js preview
 
 on:
-  # Runs on realeses
-  release:
-    types: [published]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: write
   pages: write
   id-token: write
+  issues: write
+  pull-requests: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+concurrency: preview-${{ github.ref }}
 
 jobs:
   # Build job
@@ -71,16 +65,18 @@ jobs:
           # If source files changed but packages didn't, rebuild from a prior cache.
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
-      - name: Install dependencies 🔧
+      - name: Install dependencies
+        if: github.event.action != 'closed' # Skip build if pr is closed
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Build with Next.js 🏗️
+        if: github.event.action != 'closed' # Skip build if pr is closed
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
       - name: Create .nojekyll y ➕
         run: touch out/.nojekyll
       - name: Store build artifacts 📂
         uses: actions/upload-artifact@v4
         with:
-          name: nextjs-build
+          name: nextjs-preview
           path: out
 
   # Deployment job
@@ -96,21 +92,14 @@ jobs:
       - name: Download build artifacts 📂
         uses: actions/download-artifact@v4
         with:
-          name: nextjs-build
+          name: nextjs-preview
           path: out
       - name: Setup env 🔧
         run: |
           apt-get update && apt-get install -y rsync
           git init
-      - name: Deploy to GitHub Pages 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Deploy preview to GitHub Pages 🚀
+        uses: rossjrw/pr-preview-action@v1
         with:
-          branch: pages
-          folder: ./out
-          git-config-name: GitHub
-          git-config-email: noreply@github.com
-          commit-message: 🚀 Deploy to GitHub pages
-          force: false
-          clean-exclude: pr-preview/
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          preview-branch: pages
+          source-dir: ./out
