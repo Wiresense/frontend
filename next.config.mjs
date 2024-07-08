@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    basePath: "/frontend",
+    basePath: process.env.BASE_PATH || "/frontend",
+    images: { unoptimized: true },
     output: 'export'
 };
 
