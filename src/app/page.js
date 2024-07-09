@@ -3,15 +3,17 @@
 import { useState, useEffect, useRef } from "react";
 import ThemeSettings from "@/app/components/ThemeSettings";
 import SensorWidget from "@/app/components/SensorWidget";
-import { ActionIcon, Divider, Group, NumberInput, Space, Stack, TextInput } from "@mantine/core";
+import { Accordion, ActionIcon, Anchor, Code, Divider, Group, List, Modal, NumberInput, Space, Stack, Text, TextInput } from "@mantine/core";
 import { useField } from "@mantine/form";
-import { IconDeviceFloppy, IconPlugConnected, IconPlugConnectedX } from "@tabler/icons-react";
+import { IconBrandChrome, IconBrandFirefox, IconDeviceFloppy, IconPlugConnected, IconPlugConnectedX } from "@tabler/icons-react";
+import { useDisclosure } from "@mantine/hooks";
 
 export default function Home() {
 	const [ws, setWs] = useState(null);
 	const [wsState, setWsState] = useState(WebSocket.CLOSED);
 	const [sensors, setSensors] = useState({});
 	const [maxDisplayed, setMaxDisplayed] = useState(50);
+	const [opened, { open, close }] = useDisclosure(false);
 
 	const maxDisplayedRef = useRef(maxDisplayed);
 	maxDisplayedRef.current = maxDisplayed
@@ -27,11 +29,16 @@ export default function Home() {
 		if (ws) {
 			ws.onopen = () => setWsState(WebSocket.OPEN);
 			ws.onclose = () => setWsState(WebSocket.CLOSED);
-			ws.onerror = () => setWsState(WebSocket.CLOSED);
 
 			ws.onmessage = (event) => {
 				const sensorData = JSON.parse(event.data);
 				updateSensorData(sensorData, maxDisplayed);
+			};
+
+			ws.onerror = (event) => {
+				setWsState(WebSocket.CLOSED)
+
+				ws?.close();
 			};
 		}
 
@@ -67,8 +74,14 @@ export default function Home() {
 				setWs(newWs);
 				resolve(null);
 			} catch (err) {
+				if (err instanceof DOMException && err.message.includes('insecure')) {
+					ws?.close();
+					open();
+				}
+
+				console.error(err.message);
+
 				resolve("Can't reach wiresense client. Check if IP is valid and client can be reached!");
-				console.error(err);
 			}
 		});
 	}
@@ -81,6 +94,46 @@ export default function Home() {
 	return (
 		<>
 			<ThemeSettings />
+
+			<Modal opened={opened} onClose={close} title="Update Settings" centered>
+				<Text>
+					Modern browsers prevent connections to ws (WebSocket) URLs when accessed from HTTPS sites due to security protocols. To resolve this issue and enable the tool&aps;s functionality, please follow our guides below to update your settings and allow these connections:
+				</Text>
+				<Accordion multiple defaultValue={[
+					(typeof navigator !== 'undefined' && /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor)) ? 'chrominum' : null,
+					(typeof InstallTrigger !== 'undefined') ? 'firefox' : null
+				].filter(value => value !== '')}>
+					<Accordion.Item value="chrominum">
+						<Accordion.Control icon={<IconBrandChrome />}>
+							Chrome / Edge / Opera
+						</Accordion.Control>
+						<Accordion.Panel>
+							<List type="ordered" withPadding>
+								<List.Item>Click on the padlock icon <Code>🔒</Code> or the <Code>Secure</Code> label in the address bar.</List.Item>
+								<List.Item>Click on <Code>Site settings</Code>; </List.Item>
+								<List.Item>Under <Code>Insecure conten</Code>, select <Code>Allow</Code></List.Item>
+							</List>
+						</Accordion.Panel>
+					</Accordion.Item>
+					<Accordion.Item value="firefox">
+						<Accordion.Control icon={<IconBrandFirefox />}>
+							Firefox
+						</Accordion.Control>
+						<Accordion.Panel>
+							<List type="ordered" withPadding>
+								<List.Item>Open Firefox and type <Code>about:config</Code> in the address bar, then press Enter.</List.Item>
+								<List.Item>Accept the risk warning if prompted.</List.Item>
+								<List.Item>Search for <Code>network.websocket.allowInsecureFromHTTPS</Code>.</List.Item>
+								<List.Item>Set <Code>network.websocket.allowInsecureFromHTTPS</Code> to <Code>true</Code> by double-clicking it or using the context menu.</List.Item>
+							</List>
+						</Accordion.Panel>
+					</Accordion.Item>
+				</Accordion>
+				<Space h="xs" />
+				<Text>
+					If you&apos;re uncertain about making changes, you can always revert them later after using the tool.
+				</Text>
+			</Modal>
 
 			<Group justify="center" grow>
 				<TextInput
