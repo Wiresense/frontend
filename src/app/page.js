@@ -14,6 +14,7 @@ export default function Home() {
 	const [sensors, setSensors] = useState({});
 	const [maxDisplayed, setMaxDisplayed] = useState(50);
 	const [opened, { open, close }] = useDisclosure(false);
+	const [currentUrl, setCurrentUrl] = useState('');
 
 	const maxDisplayedRef = useRef(maxDisplayed);
 	maxDisplayedRef.current = maxDisplayed
@@ -48,6 +49,13 @@ export default function Home() {
 		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [ws]);
+
+	useEffect(() => {
+		if (typeof window !== 'undefined') {
+			setCurrentUrl(window.location.href);
+		}
+	}, []);
+
 
 	function updateSensorData(sensor) {
 		const { key, data } = sensor;
@@ -112,6 +120,7 @@ export default function Home() {
 								<List.Item>Click on the padlock icon <Code>🔒</Code> or the <Code>Secure</Code> label in the address bar.</List.Item>
 								<List.Item>Click on <Code>Site settings</Code>; </List.Item>
 								<List.Item>Under <Code>Insecure conten</Code>, select <Code>Allow</Code></List.Item>
+								<List.Item><Anchor href={currentUrl}>Reload</Anchor> the page to apply settings.</List.Item>
 							</List>
 						</Accordion.Panel>
 					</Accordion.Item>
@@ -125,6 +134,7 @@ export default function Home() {
 								<List.Item>Accept the risk warning if prompted.</List.Item>
 								<List.Item>Search for <Code>network.websocket.allowInsecureFromHTTPS</Code>.</List.Item>
 								<List.Item>Set <Code>network.websocket.allowInsecureFromHTTPS</Code> to <Code>true</Code> by double-clicking it or using the context menu.</List.Item>
+								<List.Item><Anchor href={currentUrl}>Reload</Anchor> the page to apply settings.</List.Item>
 							</List>
 						</Accordion.Panel>
 					</Accordion.Item>
