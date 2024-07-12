@@ -7,6 +7,15 @@ on:
       - reopened
       - synchronize
       - closed
+    paths:
+      - .github/workflows/**
+      - src/**
+      - .eslintrc.json
+      - jsconfig.json
+      - next.config.mjs
+      - package*.json
+      - postcss.config.*js
+      - tailwind.config.js
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
