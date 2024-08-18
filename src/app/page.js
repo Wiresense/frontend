@@ -1,11 +1,10 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import ThemeSettings from "@/app/components/ThemeSettings";
 import SensorWidget from "@/app/components/SensorWidget";
-import { Accordion, ActionIcon, Anchor, Code, Divider, Group, List, Modal, NumberInput, Space, Stack, Text, TextInput } from "@mantine/core";
+import { Accordion, ActionIcon, Affix, Anchor, Code, Divider, Group, List, Modal, NumberInput, Space, Stack, Text, TextInput } from "@mantine/core";
 import { useField } from "@mantine/form";
-import { IconBrandChrome, IconBrandFirefox, IconDeviceFloppy, IconPlugConnected, IconPlugConnectedX } from "@tabler/icons-react";
+import { IconBrandChrome, IconBrandFirefox, IconBrandGithubFilled, IconDeviceFloppy, IconPlugConnected, IconPlugConnectedX } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
 
 export default function Home() {
@@ -101,7 +100,13 @@ export default function Home() {
 
 	return (
 		<>
-			<ThemeSettings />
+			<Affix position={{ bottom: 20, right: 20 }}>
+				<Anchor href="https://github.com/Wiresense">
+					<ActionIcon variant="filled" color="black">
+						<IconBrandGithubFilled />
+					</ActionIcon>
+				</Anchor>
+			</Affix>
 
 			<Modal opened={opened} onClose={close} title="Update Settings" centered>
 				<Text>
