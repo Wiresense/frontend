@@ -13,12 +13,12 @@
 		"@mantine/core": "^7.13.4",
 		"@mantine/form": "^7.13.4",
 		"@mantine/hooks": "^7.13.4",
-		"@tabler/icons-react": "^3.20.0",
+		"@tabler/icons-react": "^3.21.0",
 		"html-to-image": "^1.11.11",
 		"next": "14.2.12",
 		"react": "^18",
 		"react-dom": "^18",
-		"recharts": "^2.13.0"
+		"recharts": "^2.13.3"
 	},
 	"devDependencies": {
 		"eslint": "^8",
