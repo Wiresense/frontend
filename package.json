@@ -9,10 +9,10 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
-		"@mantine/charts": "^7.16.3",
-		"@mantine/core": "^7.16.3",
-		"@mantine/form": "^7.16.3",
-		"@mantine/hooks": "^7.16.3",
+		"@mantine/charts": "^7.17.0",
+		"@mantine/core": "^7.17.0",
+		"@mantine/form": "^7.17.0",
+		"@mantine/hooks": "^7.17.0",
 		"@tabler/icons-react": "^3.30.0",
 		"html-to-image": "^1.11.13",
 		"next": "14.2.22",
@@ -23,7 +23,7 @@
 	"devDependencies": {
 		"eslint": "^8",
 		"eslint-config-next": "14.2.3",
-		"postcss": "^8.5.2",
+		"postcss": "^8.5.3",
 		"postcss-preset-mantine": "^1.17.0",
 		"postcss-simple-vars": "^7.0.1",
 		"tailwindcss": "^3.4.17"
