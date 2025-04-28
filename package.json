@@ -9,7 +9,7 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
-		"@mantine/charts": "^7.17.4",
+		"@mantine/charts": "^7.17.5",
 		"@mantine/core": "^7.17.3",
 		"@mantine/form": "^7.17.4",
 		"@mantine/hooks": "^7.17.4",
