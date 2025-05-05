@@ -9,9 +9,9 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
-		"@mantine/charts": "^7.17.5",
+		"@mantine/charts": "^7.17.7",
 		"@mantine/core": "^7.17.3",
-		"@mantine/form": "^7.17.4",
+		"@mantine/form": "^7.17.5",
 		"@mantine/hooks": "^7.17.4",
 		"@tabler/icons-react": "^3.31.0",
 		"html-to-image": "^1.11.13",
