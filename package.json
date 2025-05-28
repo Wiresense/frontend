@@ -15,14 +15,14 @@
 		"@mantine/hooks": "^7.17.4",
 		"@tabler/icons-react": "^3.33.0",
 		"html-to-image": "^1.11.13",
-		"next": "14.2.26",
+		"next": "15.3.2",
 		"react": "^18",
 		"react-dom": "^18",
 		"recharts": "^2.15.3"
 	},
 	"devDependencies": {
 		"eslint": "^8",
-		"eslint-config-next": "14.2.3",
+		"eslint-config-next": "15.3.2",
 		"postcss": "^8.5.3",
 		"postcss-preset-mantine": "^1.17.0",
 		"postcss-simple-vars": "^7.0.1",
