@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Detect package manager 🔎
         id: detect-package-manager
         run: |
@@ -52,7 +52,7 @@ jobs:
             exit 1
           fi
       - name: Setup Node ⚙️
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: "20"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
@@ -75,7 +75,7 @@ jobs:
         env:
           BASE_PATH: "/frontend/pr-preview/pr-${{ github.event.number }}"
       - name: Store build artifacts 📂
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: github.event.action != 'closed' # Skip if pr is closed
         with:
           name: nextjs-preview
@@ -89,9 +89,9 @@ jobs:
     needs: build
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Download build artifacts 📂
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         if: github.event.action != 'closed' # Skip if pr is closed
         with:
           name: nextjs-preview
