@@ -1,6 +1,0 @@
-1:"$Sreact.fragment"
-2:I[97367,["/frontend/pr-preview/pr-102/_next/static/chunks/538642ea2e612a7a.js"],"ViewportBoundary"]
-3:I[97367,["/frontend/pr-preview/pr-102/_next/static/chunks/538642ea2e612a7a.js"],"MetadataBoundary"]
-4:"$Sreact.suspense"
-5:I[27201,["/frontend/pr-preview/pr-102/_next/static/chunks/538642ea2e612a7a.js"],"IconMark"]
-0:{"buildId":"SSCrJE2p8kRncAm6zVCMs","rsc":["$","$1","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],["$","$L2",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$L3",null,{"children":["$","$4",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Wiresense"}],["$","link","1",{"rel":"icon","href":"/frontend/pr-preview/pr-102/favicon.ico?favicon.29b5028b.ico","sizes":"256x256","type":"image/x-icon"}],["$","$L5","2",{}]]}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"loading":null,"isPartial":false}
