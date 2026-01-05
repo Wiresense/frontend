@@ -1,0 +1,58 @@
+{
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": ["config:recommended"],
+  "rangeStrategy": "bump",
+  "branchPrefix": "renovate/",
+  "additionalBranchPrefix": "{{{manager}}}/",
+  "labels": ["dependencies", "renovate"],
+  "commitMessagePrefix": "⬆️ Bump ",
+  "commitMessageAction": "",
+  "commitMessageTopic": "{{depName}}",
+  "commitMessageExtra": " to {{newVersion}}",
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["^next$", "^react$", "^react-dom$", "^eslint-config-next$", "^next-"],
+      "groupName": "next/react ecosystem"
+    },
+    {
+      "matchPackagePatterns": ["^@mantine/"],
+      "groupName": "mantine monorepo"
+    },
+    {
+      "matchPackagePatterns": ["^tailwindcss$", "^postcss", "^postcss-", "^autoprefixer$"],
+      "groupName": "css tooling"
+    },
+    {
+      "matchPackagePatterns": ["^recharts$"],
+      "groupName": "charts (recharts)"
+    },
+    {
+      "matchPackagePatterns": ["^@tabler/icons-react$"],
+      "groupName": "tabler icons"
+    },
+    {
+      "matchPackagePatterns": ["^html-to-image$"],
+      "groupName": "html-to-image"
+    },
+    {
+      "matchPackagePatterns": ["^eslint$"],
+      "groupName": "eslint"
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "groupName": "github actions"
+    },
+    {
+      "matchPackageNames": ["actions/checkout", "actions/setup-node", "actions/upload-artifact", "actions/download-artifact", "actions/cache"],
+      "groupName": "github actions (core)"
+    },
+    {
+      "matchPackageNames": ["JamesIves/github-pages-deploy-action"],
+      "groupName": "github pages deploy"
+    },
+    {
+      "matchPackageNames": ["rossjrw/pr-preview-action"],
+      "groupName": "pr preview action"
+    }
+  ]
+}
