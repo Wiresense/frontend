@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import SensorWidget from "@/app/components/SensorWidget";
 import { Accordion, ActionIcon, Affix, Anchor, Code, Divider, Group, List, Modal, NumberInput, Space, Stack, Text, TextInput } from "@mantine/core";
 import { useField } from "@mantine/form";
@@ -16,60 +16,50 @@ export default function Home() {
 	const [currentUrl, setCurrentUrl] = useState('');
 
 	const maxDisplayedRef = useRef(maxDisplayed);
-	maxDisplayedRef.current = maxDisplayed
+	useLayoutEffect(() => {
+		maxDisplayedRef.current = maxDisplayed;
+	}, [maxDisplayed]);
 
-	const ipField = useField({
-		initialValue: 'localhost:8080',
-		validateOnChange: false,
-		validate: connect
-	});
+
 
 
 	useEffect(() => {
-		if (ws) {
-			ws.onopen = () => setWsState(WebSocket.OPEN);
-			ws.onclose = () => setWsState(WebSocket.CLOSED);
+		if (!ws) return;
 
-			ws.onmessage = (event) => {
-				const sensorData = JSON.parse(event.data);
-				updateSensorData(sensorData, maxDisplayed);
-			};
+		const onOpen = () => setWsState(WebSocket.OPEN);
+		const onClose = () => setWsState(WebSocket.CLOSED);
+		const onMessage = (event) => {
+			const { key, data } = JSON.parse(event.data);
+			setSensors((previous) => {
+				const points = [...(previous[key] || []), data];
+				return { ...previous, [key]: points.slice(-maxDisplayedRef.current) };
+			});
+		};
+		const onError = () => {
+			setWsState(WebSocket.CLOSED);
+			ws.close();
+		};
 
-			ws.onerror = (event) => {
-				setWsState(WebSocket.CLOSED)
-
-				ws?.close();
-			};
-		}
-
+		ws.addEventListener('open', onOpen);
+		ws.addEventListener('close', onClose);
+		ws.addEventListener('message', onMessage);
+		ws.addEventListener('error', onError);
 		return () => {
-			ws?.close();
+			ws.removeEventListener('open', onOpen);
+			ws.removeEventListener('close', onClose);
+			ws.removeEventListener('message', onMessage);
+			ws.removeEventListener('error', onError);
+			ws.close();
 			setSensors({});
 		};
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [ws]);
 
 	useEffect(() => {
-		if (typeof window !== 'undefined') {
+		const frame = window.requestAnimationFrame(() => {
 			setCurrentUrl(window.location.href);
-		}
-	}, []);
-
-
-	function updateSensorData(sensor) {
-		const { key, data } = sensor;
-		setSensors((prevSensors) => {
-			const newSensors = { ...prevSensors };
-			if (!newSensors[key]) {
-				newSensors[key] = [];
-			}
-			newSensors[key].push(data);
-			while (newSensors[key].length > maxDisplayedRef.current) {
-				newSensors[key].shift(); // Remove the oldest entry
-			}
-			return newSensors;
 		});
-	};
+		return () => window.cancelAnimationFrame(frame);
+	}, []);
 
 
 	function connect(value) {
@@ -97,6 +87,12 @@ export default function Home() {
 		ws?.close();
 		setSensors({});
 	}
+
+	const ipField = useField({
+		initialValue: 'localhost:8080',
+		validateOnChange: false,
+		validate: connect
+	});
 
 	return (
 		<>
