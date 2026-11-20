@@ -9,10 +9,10 @@
 		"lint": "eslint ."
 	},
 	"dependencies": {
-		"@mantine/charts": "^9.8.1",
-		"@mantine/core": "^9.8.1",
-		"@mantine/form": "^9.8.1",
-		"@mantine/hooks": "^9.8.1",
+		"@mantine/charts": "^9.8.2",
+		"@mantine/core": "^9.8.2",
+		"@mantine/form": "^9.8.2",
+		"@mantine/hooks": "^9.8.2",
 		"@tabler/icons-react": "^3.52.0",
 		"html-to-image": "^1.11.13",
 		"next": "16.4.6",
